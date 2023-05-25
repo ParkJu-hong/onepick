@@ -10,6 +10,14 @@ const Main = styled.div`
     display: flex;
     justify-content: space-between;
 
+    .menu__section {
+        display: flex;
+
+        .search__open__btn {
+            display: none;
+        } 
+    }
+
     .logo__section {
         margin-left: 20px;
         display: flex;
@@ -67,13 +75,32 @@ const Main = styled.div`
             width: 100%;
         }
     }
+
+
+    @media screen and (max-width: 768px) {
+        .menu__section {
+            width: 100%;
+            justify-content: space-between;
+            .search__open__btn {
+                display: flex;
+                align-items: center;
+            } 
+        }
+        .search__section {
+            display: none;
+        }
+
+        .profile__section {
+            display: none;
+        }
+    }
 `;
 
 
 function Header() {
     return (
         <Main>
-            <div style={{ display: 'flex' }}>
+            <div className="menu__section">
                 <div style={{ display: 'flex', alignItems: 'center' }}><IoMenuSharp size={30} /></div>
                 <div className="logo__section">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -81,6 +108,7 @@ function Header() {
                     </div>
                     <div className="title">1PICK</div>
                 </div>
+                <div className="search__open__btn"><AiOutlineSearch/></div>
             </div>
             <div className="search__section">
                 <input className="search__bar" />
