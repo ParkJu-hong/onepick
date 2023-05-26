@@ -38,6 +38,12 @@ const Main = styled.div`
             }
         }
     }
+
+    @media screen and (max-width: 768px) {
+        .recommand__card__info__section {
+            display: none;
+        }
+    }
 `;
 
 function RecommandCard() {
@@ -53,7 +59,7 @@ function RecommandCard() {
                     </div>
                     <div className="recommand__card__info__right__bottom">
                         <div style={{ display: 'flex', alignItems: 'center', color: '#8D8D8D', fontSize: '8px' }}><FiBarChart /> <div>$516.16K</div></div>
-                        <div style={{ marginLeft: '10px'}}><FaRegThumbsUp color={'#DBBF00'} size={10} /></div>
+                        <div style={{ marginLeft: '10px' }}><FaRegThumbsUp color={'#DBBF00'} size={10} /></div>
                     </div>
                 </div>
             </div>

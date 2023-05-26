@@ -102,6 +102,10 @@ const Main = styled.div`
         }
     }
 
+    .mobile__search__section {
+        display: none;
+    }
+
 
     @media screen and (max-width: 768px) {
         .menu__section {
@@ -118,6 +122,64 @@ const Main = styled.div`
 
         .profile__section {
             display: none;
+        }
+
+        .mobile__search__section {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width : 100vw;
+            height : 100vh;
+            background-color : white;
+            z-index : 100;
+
+            .mobile__search__section__margin {
+                margin: 50px;
+
+                .mobile__search__bar__section {
+                    display: flex;
+                    justify-content: center;
+
+                    .mobile__search__bar {
+                        width: 374px;
+                        height: 39.99px;
+                        background: #FFFFFF;
+                        border: 0.74116px solid rgba(0, 0, 0, 0.1);
+                        border-radius: 0px;
+                    }
+
+                    .mobile__search__btn {
+                        width: 47.2px;
+                        height: 39.99px;
+                        background: #DEDEDE;
+                        border: 0.74116px solid rgba(48, 48, 48, 0.1);
+                        border-radius: 0px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+                .moblile__search__recommend__section {
+                    position: fixed;
+                    top: 130px;
+                    left: 10%;
+                    width: 80vw;
+                    height: 80vh;
+
+                    .moblile__search__recommend__section__infos {
+                        margin: 30px;
+                        .moblile__search__recommend__section__info__title {
+                            font-family: 'Roboto';
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 14px;
+                            line-height: 16px;
+                            color: #A3A3A3;
+                        }
+                    }
+                }
+            }
         }
     }
 `;
@@ -153,7 +215,12 @@ function Header() {
                     </div>
                     <div className="title">1PICK</div>
                 </div>
-                <div className="search__open__btn"><AiOutlineSearch /></div>
+                <div
+                    className="search__open__btn"
+                    onClick={() => {
+                        setShowRecommendations(true);
+                    }}
+                ><AiOutlineSearch /></div>
             </div>
             <div className="search__section">
                 <input
@@ -172,7 +239,7 @@ function Header() {
                             <div className="search__recommend__section__info">
                                 {recommendedKeywords.map((recommendedKeyword, index) => (
                                     // <div key={index}>{recommendedKeyword}</div>
-                                    <RecommandCard />
+                                    <RecommandCard key={index} />
                                 ))}
                             </div>
                         </div>
@@ -187,6 +254,27 @@ function Header() {
                     <div style={{ display: 'flex', alignItems: 'center' }}><CgProfile size={13} /></div>
                 </div>
             </div>
+            {/* 모바일일때 검색 페이지 */}
+            {showRecommendations && (<div className="mobile__search__section">
+                <div className="mobile__search__section__margin">
+                    <div className="mobile__search__bar__section">
+                        <input className="mobile__search__bar" placeholder="Search" />
+                        <div className="mobile__search__btn"><AiOutlineSearch color="#333333" /></div>
+                    </div>
+                    <div className="moblile__search__recommend__section">
+                        <div className="moblile__search__recommend__section__infos">
+                            <div className="moblile__search__recommend__section__info__title">Trending</div>
+                            <div className="moblile__search__recommend__section__info">
+                                {recommendedKeywords.map((recommendedKeyword, index) => (
+                                    // <div key={index}>{recommendedKeyword}</div>
+                                    <RecommandCard key={index} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            )}
         </Main>
     )
 }
