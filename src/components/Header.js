@@ -44,6 +44,7 @@ const Main = styled.div`
             border-radius: 24.4941px 0px 0px 24.4941px;
             width: 302px;
             height: 30px;
+            padding-left: 15px;
         }
         .search__button {
             background: #F4F4F4;
@@ -111,7 +112,7 @@ function Header() {
                 <div className="search__open__btn"><AiOutlineSearch/></div>
             </div>
             <div className="search__section">
-                <input className="search__bar" />
+                <input className="search__bar" placeholder="Search"/>
                 <button className="search__button"><AiOutlineSearch color="#00B66D" /></button>
             </div>
             <div className="profile__section">

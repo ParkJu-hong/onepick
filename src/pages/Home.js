@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import Categorys from '../components/Categorys'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import LoginModal from '../components/LoginModal';
 import PcMenus from '../components/PcMenus';
 
 const Main = styled.div`
@@ -76,6 +77,7 @@ function Home() {
                 </div>
             </div>
             <Footer />
+            {/* <LoginModal /> */}
         </Main>
     );
 }
