@@ -35,13 +35,48 @@ const Main = styled.div`
             }
             .recommand__card__info__right__bottom {
                 display: flex;
+                .fibarchart {
+                    display: flex;
+                    align-items: center;
+                    color: #8D8D8D;
+                    font-size: 8px;
+                }
+                .faregtumbsup {
+                    margin-left: 10px;
+                    font-size: 10px;
+                }
             }
         }
     }
 
     @media screen and (max-width: 768px) {
         .recommand__card__info__section {
-            display: none;
+            margin: 0px;
+            .recommand__card__info__left {
+                flex: 0.5;
+                .recommand__card__info__left__box {
+                    width: 80px;
+                    height: 74px;
+                }
+            }
+            .recommand__card__info__right {
+                .recommand__card__info__right__top {
+                    margin-top: 10px;
+                    font-size: 18.65px;
+                }
+
+                .recommand__card__info__right__bottom {
+                    .fibarchart {
+                        font-size: 15px;
+                    }
+                    .faregtumbsup{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 20px;
+                    }
+                }
+            }
         }
     }
 `;
@@ -58,8 +93,8 @@ function RecommandCard() {
                         Topic headline goes here and this is a demo headline
                     </div>
                     <div className="recommand__card__info__right__bottom">
-                        <div style={{ display: 'flex', alignItems: 'center', color: '#8D8D8D', fontSize: '8px' }}><FiBarChart /> <div>$516.16K</div></div>
-                        <div style={{ marginLeft: '10px' }}><FaRegThumbsUp color={'#DBBF00'} size={10} /></div>
+                        <div className="fibarchart"><FiBarChart /> <div>$516.16K</div></div>
+                        <div className="faregtumbsup"><FaRegThumbsUp color={'#DBBF00'} /></div>
                     </div>
                 </div>
             </div>

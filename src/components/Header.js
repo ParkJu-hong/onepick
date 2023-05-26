@@ -177,6 +177,9 @@ const Main = styled.div`
                             line-height: 16px;
                             color: #A3A3A3;
                         }
+                        .moblile__search__recommend__section__info {
+                            margin-top: 20px;
+                        }
                     }
                 }
             }
@@ -238,7 +241,6 @@ function Header() {
                             <div className="search__recommend__section__info__title">Trending</div>
                             <div className="search__recommend__section__info">
                                 {recommendedKeywords.map((recommendedKeyword, index) => (
-                                    // <div key={index}>{recommendedKeyword}</div>
                                     <RecommandCard key={index} />
                                 ))}
                             </div>
@@ -266,8 +268,7 @@ function Header() {
                             <div className="moblile__search__recommend__section__info__title">Trending</div>
                             <div className="moblile__search__recommend__section__info">
                                 {recommendedKeywords.map((recommendedKeyword, index) => (
-                                    // <div key={index}>{recommendedKeyword}</div>
-                                    <RecommandCard key={index} />
+                                    <div style={{ marginTop: '30px'}}><RecommandCard key={index} /></div>
                                 ))}
                             </div>
                         </div>
