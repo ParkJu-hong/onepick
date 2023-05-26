@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { IoMenuSharp } from 'react-icons/io5';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BsWallet } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
+import RecommandCard from './RecommandCard';
 
 const Main = styled.div`
     padding: 15px 30px 31px 30px; 
@@ -52,6 +53,30 @@ const Main = styled.div`
             border-radius: 0px 24.4941px 24.4941px 0px;
             height: 33.4px;
         }
+
+        .search__recommend__section {
+            position: fixed;
+            top: 60px;
+            left: 35%;
+            width: 30vw;
+            height: 50vh;
+            background: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0px 0px 17.92px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+
+            .search__recommend__section__infos {
+                margin: 30px;
+                .search__recommend__section__info__title {
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #A3A3A3;
+                }
+            }
+        }
     }
 
     .profile__section {
@@ -99,6 +124,25 @@ const Main = styled.div`
 
 
 function Header() {
+
+    const [keyword, setKeyword] = useState('');
+    const [showRecommendations, setShowRecommendations] = useState(false);
+
+    const handleInputChange = (event) => {
+        const keyword = event.target.value;
+        setKeyword(keyword);
+    }
+
+    const handleInputFocus = () => {
+        setShowRecommendations(true);
+    }
+
+    const handleInputBlur = () => {
+        setShowRecommendations(false);
+    }
+
+    const recommendedKeywords = ['react', 'javascript', 'node.js', 'blah'];
+
     return (
         <Main>
             <div className="menu__section">
@@ -109,18 +153,38 @@ function Header() {
                     </div>
                     <div className="title">1PICK</div>
                 </div>
-                <div className="search__open__btn"><AiOutlineSearch/></div>
+                <div className="search__open__btn"><AiOutlineSearch /></div>
             </div>
             <div className="search__section">
-                <input className="search__bar" placeholder="Search"/>
+                <input
+                    className="search__bar"
+                    placeholder="Search"
+                    value={keyword}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                />
                 <button className="search__button"><AiOutlineSearch color="#00B66D" /></button>
+                {showRecommendations && (
+                    <div className="search__recommend__section">
+                        <div className="search__recommend__section__infos">
+                            <div className="search__recommend__section__info__title">Trending</div>
+                            <div className="search__recommend__section__info">
+                                {recommendedKeywords.map((recommendedKeyword, index) => (
+                                    // <div key={index}>{recommendedKeyword}</div>
+                                    <RecommandCard />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
             <div className="profile__section">
                 <div className="profill__box">
                     <BsWallet color="#00B66D" size={13} />
                     <div>Connect wallet</div>
                     <div> | </div>
-                    <div style={{ display: 'flex', alignItems: 'center'}}><CgProfile size={13}/></div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}><CgProfile size={13} /></div>
                 </div>
             </div>
         </Main>
