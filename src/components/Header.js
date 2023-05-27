@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { IoMenuSharp } from 'react-icons/io5';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BsWallet } from 'react-icons/bs';
+import { BiArrowBack } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import RecommandCard from './RecommandCard';
 import SideMenus from './SideMenus';
@@ -136,6 +137,15 @@ const Main = styled.div`
     // 사이드 메뉴 끝
 
     @media screen and (max-width: 768px) {
+
+        .back__to__prepage {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 999 !important;
+        }
+
+
         .menu__section {
             width: 100%;
             justify-content: space-between;
@@ -214,6 +224,7 @@ const Main = styled.div`
         }
     }
 `;
+
 
 
 function Header() {
@@ -297,7 +308,7 @@ function Header() {
                     </div>
                 </div>
                 {/* 모바일일때 검색 페이지 */}
-                {showRecommendations && (<div className="mobile__search__section">
+                {showRecommendations && (<><div className="mobile__search__section">
                     <div className="mobile__search__section__margin">
                         <div className="mobile__search__bar__section">
                             <input className="mobile__search__bar" placeholder="Search" />
@@ -315,6 +326,12 @@ function Header() {
                         </div>
                     </div>
                 </div>
+                    <div className="back__to__prepage">
+                        <BiArrowBack size={30} onClick={()=>{
+                            setShowRecommendations(false);
+                        }}/>
+                    </div>
+                </>
                 )}
             </Main>
             {isSideMenusOpen && <SideMenus isSideMenusOpen={isSideMenusOpen} toggleMenu={toggleMenu} />}
