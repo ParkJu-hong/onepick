@@ -44,50 +44,52 @@ const Main = styled.div`
         margin-top: 40px;
 
         input[type="checkbox"]{
-        display: none;
-      }
-input[type="checkbox"] + label{
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        border:3px solid #707070;
-        position: relative;
-      }
+            display: none;
+        }
+        input[type="checkbox"] + label{
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border:1.00516px solid rgba(45, 45, 45, 0.6);
+            border-radius: 2.01032px;  
+            /* position: relative; */
+        }
         input[id="check1"]:checked + label::after{
-        content:'✔';
-        font-size: 15px;
-        width: 15px;
-        height: 15px;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top:0;
-      }
-      input[id="check2"]:checked + label::after{
-        content:'✔';
-        font-size: 15px;
-        width: 15px;
-        height: 15px;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top:0;
-      }
-      input[id="check3"]:checked + label::after{
-        content:'✔';
-        font-size: 15px;
-        width: 15px;
-        height: 15px;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top:0;
-      }
+            content:'✔';
+            font-size: 15px;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            /* position: absolute; */
+            left: 0;
+            top:0;
+        }
+        input[id="check2"]:checked + label::after{
+            content:'✔';
+            font-size: 15px;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            /* position: absolute; */
+            left: 0;
+            top:0;
+        }
+        input[id="check3"]:checked + label::after{
+            content:'✔';
+            font-size: 15px;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            /* position: absolute; */
+            left: 0;
+            top:0;
+        }
 
         .checkbox__section {
             display: flex;
             flex-direction: column;
             margin-left: 2vw;
+            margin-bottom: 30px;
         }
     }
 `;

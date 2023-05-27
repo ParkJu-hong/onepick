@@ -5,6 +5,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BsWallet } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import RecommandCard from './RecommandCard';
+import SideMenus from './SideMenus';
 
 const Main = styled.div`
     padding: 15px 30px 31px 30px; 
@@ -27,6 +28,7 @@ const Main = styled.div`
         font-weight: 600;
         font-size: 30.0577px;
         line-height: 38px;
+        
 
         .title {
             display: flex;
@@ -106,6 +108,32 @@ const Main = styled.div`
         display: none;
     }
 
+    // 사이드 메뉴 css 시작
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px; /* 초기에는 화면 왼쪽 밖으로 이동 */
+        width: 250px;
+        height: 100%;
+        transition: transform 0.3s ease; /* transform 속성에 애니메이션 효과 추가 */
+        background: #FFFFFF;
+        border-right: 1px solid rgba(0, 182, 109, 0.2);
+        border-radius: 0px 10px 10px 0px;
+    }
+
+    .side-menu.open {
+        left: 0px;
+        transform: translateX(0); /* 열릴 때 사이드 메뉴를 왼쪽으로 이동시킴 */
+    }
+
+    .toggle-button {
+        /* 토글 버튼 스타일 */
+    }
+
+    .menu-items {
+        /* 메뉴 아이템 스타일 */
+    }
+    // 사이드 메뉴 끝
 
     @media screen and (max-width: 768px) {
         .menu__section {
@@ -192,6 +220,11 @@ function Header() {
 
     const [keyword, setKeyword] = useState('');
     const [showRecommendations, setShowRecommendations] = useState(false);
+    const [isSideMenusOpen, setIsSideMenusOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsSideMenusOpen(!isSideMenusOpen);
+    };
 
     const handleInputChange = (event) => {
         const keyword = event.target.value;
@@ -209,74 +242,83 @@ function Header() {
     const recommendedKeywords = ['react', 'javascript', 'node.js', 'blah'];
 
     return (
-        <Main>
-            <div className="menu__section">
-                <div style={{ display: 'flex', alignItems: 'center' }}><IoMenuSharp size={30} /></div>
-                <div className="logo__section">
+        <>
+            <Main>
+                <div className="menu__section">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="./onepick_logo.png" style={{ width: '30px', height: '30px' }} />
+                        <IoMenuSharp
+                            size={30}
+                            onClick={() => {
+                                toggleMenu();
+                            }} />
                     </div>
-                    <div className="title">1PICK</div>
+                    <div className="logo__section">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="./onepick_logo.png" style={{ width: '30px', height: '30px' }} />
+                        </div>
+                        <div className="title">1PICK</div>
+                    </div>
+                    <div
+                        className="search__open__btn"
+                        onClick={() => {
+                            setShowRecommendations(true);
+                        }}
+                    ><AiOutlineSearch /></div>
                 </div>
-                <div
-                    className="search__open__btn"
-                    onClick={() => {
-                        setShowRecommendations(true);
-                    }}
-                ><AiOutlineSearch /></div>
-            </div>
-            <div className="search__section">
-                <input
-                    className="search__bar"
-                    placeholder="Search"
-                    value={keyword}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                />
-                <button className="search__button"><AiOutlineSearch color="#00B66D" /></button>
-                {showRecommendations && (
-                    <div className="search__recommend__section">
-                        <div className="search__recommend__section__infos">
-                            <div className="search__recommend__section__info__title">Trending</div>
-                            <div className="search__recommend__section__info">
-                                {recommendedKeywords.map((recommendedKeyword, index) => (
-                                    <RecommandCard key={index} />
-                                ))}
+                <div className="search__section">
+                    <input
+                        className="search__bar"
+                        placeholder="Search"
+                        value={keyword}
+                        onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
+                    />
+                    <button className="search__button"><AiOutlineSearch color="#00B66D" /></button>
+                    {showRecommendations && (
+                        <div className="search__recommend__section">
+                            <div className="search__recommend__section__infos">
+                                <div className="search__recommend__section__info__title">Trending</div>
+                                <div className="search__recommend__section__info">
+                                    {recommendedKeywords.map((recommendedKeyword, index) => (
+                                        <RecommandCard key={index} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className="profile__section">
+                    <div className="profill__box">
+                        <BsWallet color="#00B66D" size={13} />
+                        <div>Connect wallet</div>
+                        <div> | </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}><CgProfile size={13} /></div>
+                    </div>
+                </div>
+                {/* 모바일일때 검색 페이지 */}
+                {showRecommendations && (<div className="mobile__search__section">
+                    <div className="mobile__search__section__margin">
+                        <div className="mobile__search__bar__section">
+                            <input className="mobile__search__bar" placeholder="Search" />
+                            <div className="mobile__search__btn"><AiOutlineSearch color="#333333" /></div>
+                        </div>
+                        <div className="moblile__search__recommend__section">
+                            <div className="moblile__search__recommend__section__infos">
+                                <div className="moblile__search__recommend__section__info__title">Trending</div>
+                                <div className="moblile__search__recommend__section__info">
+                                    {recommendedKeywords.map((recommendedKeyword, index) => (
+                                        <div style={{ marginTop: '30px' }}><RecommandCard key={index} /></div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 )}
-            </div>
-            <div className="profile__section">
-                <div className="profill__box">
-                    <BsWallet color="#00B66D" size={13} />
-                    <div>Connect wallet</div>
-                    <div> | </div>
-                    <div style={{ display: 'flex', alignItems: 'center' }}><CgProfile size={13} /></div>
-                </div>
-            </div>
-            {/* 모바일일때 검색 페이지 */}
-            {showRecommendations && (<div className="mobile__search__section">
-                <div className="mobile__search__section__margin">
-                    <div className="mobile__search__bar__section">
-                        <input className="mobile__search__bar" placeholder="Search" />
-                        <div className="mobile__search__btn"><AiOutlineSearch color="#333333" /></div>
-                    </div>
-                    <div className="moblile__search__recommend__section">
-                        <div className="moblile__search__recommend__section__infos">
-                            <div className="moblile__search__recommend__section__info__title">Trending</div>
-                            <div className="moblile__search__recommend__section__info">
-                                {recommendedKeywords.map((recommendedKeyword, index) => (
-                                    <div style={{ marginTop: '30px'}}><RecommandCard key={index} /></div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            )}
-        </Main>
+            </Main>
+            {isSideMenusOpen && <SideMenus isSideMenusOpen={isSideMenusOpen} toggleMenu={toggleMenu} />}
+        </>
     )
 }
 
