@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { IoMenuSharp } from 'react-icons/io5';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { BsWallet } from 'react-icons/bs';
-import { BiArrowBack } from 'react-icons/bi';
+import { BsWallet, BsMoon, BsQuestionCircle } from 'react-icons/bs';
+import { BiArrowBack, BiToggleLeft, BiToggleRight } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
+import { CiMenuKebab } from 'react-icons/ci';
 import RecommandCard from './RecommandCard';
 import SideMenus from './SideMenus';
+import { TfiWorld } from 'react-icons/tfi';
 
 const Main = styled.div`
     padding: 15px 30px 31px 30px; 
@@ -135,6 +137,31 @@ const Main = styled.div`
         /* 메뉴 아이템 스타일 */
     }
     // 사이드 메뉴 끝
+    .pc__small__menu {
+                position: fixed;
+                top: 60px;
+                right: 160px;
+                background: #FFFFFF;
+                border: 0.746062px solid #EBEBEB;
+                box-shadow: 0px 7.46062px 14.9212px #E5E5E5;
+                border-radius: 5.98739px;
+
+                .setting__section {
+                    margin: 10px;
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15.8538px;
+                    line-height: 19px;
+                    color: #383838;
+
+                    .for__align__item__center {
+                        display: flex;
+                        align-items: center;
+                        margin-left: 20px;
+                    }
+                }
+            }
 
     @media screen and (max-width: 768px) {
 
@@ -232,6 +259,8 @@ function Header() {
     const [keyword, setKeyword] = useState('');
     const [showRecommendations, setShowRecommendations] = useState(false);
     const [isSideMenusOpen, setIsSideMenusOpen] = useState(false);
+    const [isPcSmallMenu, setIsPcSmallMenu] = useState(false);
+    const [nightMode, setNightMode] = useState(false);
 
     const toggleMenu = () => {
         setIsSideMenusOpen(!isSideMenusOpen);
@@ -300,6 +329,11 @@ function Header() {
                     )}
                 </div>
                 <div className="profile__section">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <CiMenuKebab size={13} onClick={() => {
+                            setIsPcSmallMenu(!isPcSmallMenu);
+                        }} />
+                    </div>
                     <div className="profill__box">
                         <BsWallet color="#00B66D" size={13} />
                         <div>Connect wallet</div>
@@ -327,12 +361,32 @@ function Header() {
                     </div>
                 </div>
                     <div className="back__to__prepage">
-                        <BiArrowBack size={30} onClick={()=>{
+                        <BiArrowBack size={30} onClick={() => {
                             setShowRecommendations(false);
-                        }}/>
+                        }} />
                     </div>
                 </>
                 )}
+                {isPcSmallMenu && (<div className="pc__small__menu">
+                    <div className="setting__section">
+                        <div style={{ display: 'flex' }} >
+                            <div className="for__align__item__center"><TfiWorld size={17} color={'#00B66D'}/></div>
+                            <div className="for__align__item__center">Language</div>
+                            <div className="for__align__item__center">{`en >`}</div>
+                        </div>
+                        <div style={{ display: 'flex', marginTop: '20px' }} >
+                            <div className="for__align__item__center"><BsMoon size={17} color={'#00B66D'} /></div>
+                            <div className="for__align__item__center">Night Mood</div>
+                            <div className="for__align__item__center">{!nightMode ?
+                                <BiToggleLeft onClick={() => { setNightMode(!nightMode) }} size={23} color={'#00B66D'}/>
+                                : <BiToggleRight onClick={() => { setNightMode(!nightMode) }} size={23} color={'#00B66D'}/>}</div>
+                        </div>
+                        <div style={{ display: 'flex', marginTop: '20px' }}>
+                            <div className="for__align__item__center"><BsQuestionCircle size={17} color={'#00B66D'}/></div>
+                            <div className="for__align__item__center">Help</div>
+                        </div>
+                    </div>
+                </div>)}
             </Main>
             {isSideMenusOpen && <SideMenus isSideMenusOpen={isSideMenusOpen} toggleMenu={toggleMenu} />}
         </>
